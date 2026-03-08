@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Breast Cancer Detection</title>
+</head>
+
+<body style="text-align:center;font-family:Arial">
+
+<h1>Breast Cancer Detection System</h1>
+<h3>Using PCA and Logistic Regression</h3>
+
+<form action="/predict" method="post">
+
+<p>Radius Mean</p>
+<input type="text" name="radius" value="{{ request.form.get('radius','') }}" required>
+
+<p>Texture Mean</p>
+<input type="text" name="texture" value="{{ request.form.get('texture','') }}" required>
+
+<p>Perimeter Mean</p>
+<input type="text" name="perimeter" value="{{ request.form.get('perimeter','') }}" required>
+
+<p>Area Mean</p>
+<input type="text" name="area" value="{{ request.form.get('area','') }}" required>
+
+<br><br>
+
+<input type="submit" value="Predict">
+<button type="button" onclick="window.location.href='/'">Clear</button>
+</form>
+
+<br>
+
+<h2>{{ prediction_text }}</h2>
+<h3>Model Accuracy: {{ accuracy_text }}%</h3>
+
+<br><br>
+
+{% if show_graph %}
+
+<h2>PCA Visualization</h2>
+
+<img src="{{ url_for('static', filename='pca_plot.png') }}" width="500">
+
+{% endif %}
+
+</body>
+
+</html>
